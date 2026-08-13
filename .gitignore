@@ -1,0 +1,61 @@
+# ================================
+# plant-disease-vision-transformers
+# .gitignore
+# ================================
+
+# === CARPETAS LOCALES (no subir a GitHub) ===
+CV_Analisis/
+Administración_GITHUB/
+Administracion_GITHUB/
+
+# === JUPYTER ===
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.env
+.env.local
+venv/
+.venv/
+env/
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+*.log
+*.pyc
+
+# === MODELOS Y PESOS (demasiado grandes para Git estándar) ===
+# Usar Git LFS o GitHub Releases para archivos grandes
+*.pt
+*.pth
+*.ptl
+*.h5
+*.pkl
+*.ckpt
+checkpoints/
+weights/
+models/saved/
+
+# === DATOS Y DATASETS ===
+data/raw/
+data/processed/
+*.zip
+*.tar.gz
+*.gz
+*.npy
+*.npz
+# Excepción: permitir archivos CSV de resultados pequeños
+# !results/metrics.csv
+
+# === GENERAL ===
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+*.swo
+desktop.ini
