@@ -6,7 +6,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1+-ee4c2c)](https://pytorch.org)
 [![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-FFD21E)](https://huggingface.co)
 
-Comparative benchmark of Vision Transformers, Mamba-SSM, and CNN baselines for plant disease classification. Fine-tuned on DatasetCOLEAF (9-class coffee leaf disease dataset) using PyTorch and Hugging Face.
+Comparative benchmark of 8 deep learning architectures — CNN baselines, Vision Transformers, and State Space Models — for multi-class plant disease classification. Fine-tuned on DatasetCOLEAF (9-class coffee leaf disease dataset) using PyTorch and Hugging Face.
 
 ---
 
@@ -14,13 +14,16 @@ Comparative benchmark of Vision Transformers, Mamba-SSM, and CNN baselines for p
 
 | Architecture | Model | Val. Accuracy | Val. F1-Score (macro) | Parameters |
 |:---|:---|:---:|:---:|:---:|
-| Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | — | — | 86M |
-| Vision Transformer | BEiT `microsoft/beit-base-patch16-224` | — | — | 86M |
-| State Space Model | Mamba-SSM | — | — | — |
-| CNN | ResNet-50 | — | — | 25M |
 | CNN | VGG16 | — | — | 138M |
+| CNN | Inception_v3 | — | — | 27M |
+| CNN | ResNet200d | — | — | 65M |
+| Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | — | — | 86M |
+| Vision Transformer | ViT-B/16 `nateraw/vit-base-patch16-224-cifar10` | — | — | 86M |
+| Vision Transformer | Swin-B `swin_base_patch4_window7_224` | — | — | 88M |
+| Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | — | — | 86M |
+| State Space Model | MambaVision-L `nvidia/MambaVision-L-21K` | — | — | — |
 
-> Results pending. Will be updated after training. Confusion matrices and learning curves available in `/results/`.
+> Results pending. Will be updated after final training runs. Confusion matrices and learning curves in `/results/`.
 
 ---
 
@@ -28,49 +31,55 @@ Comparative benchmark of Vision Transformers, Mamba-SSM, and CNN baselines for p
 
 ```
 Dataset
-──────────────────────────────────────────────────────────────
-  DatasetCOLEAF · 9 classes · RGB images resized to 224×224
+────────────────────────────────────────────────────────────────
+  DatasetCOLEAF · 9 classes · RGB images resized to 224x224
 
 Preprocessing Pipeline
-──────────────────────────────────────────────────────────────
+────────────────────────────────────────────────────────────────
   Raw image
-      │
-      ├─ Otsu thresholding          (unsupervised segmentation)
-      │       │
-      │       └─ regionprops        (region feature extraction)
-      │
-      └─ Tensor normalization       (mean/std per channel)
+      |
+      +-- Otsu thresholding          (unsupervised segmentation)
+      |       |
+      |       +-- regionprops        (region feature extraction)
+      |
+      +-- Tensor normalization       (mean/std per channel)
 
-Model Training
-──────────────────────────────────────────────────────────────
-  ┌──────────────────────────────────────────────────────────┐
-  │                     PyTorch Training Loop                │
-  │                                                          │
-  │  ┌─────────────────┐  ┌─────────┐  ┌───────────────┐   │
-  │  │   ViT-B/16      │  │  BEiT   │  │  Mamba-SSM    │   │
-  │  │  (HuggingFace)  │  │  (HF)   │  │  (SSM-based)  │   │
-  │  │  Progressive    │  │  Full   │  │  Alternative  │   │
-  │  │  unfreezing     │  │  fine-  │  │  architecture │   │
-  │  │  (30% deep      │  │  tuning │  │               │   │
-  │  │   layers)       │  │         │  │               │   │
-  │  └─────────────────┘  └─────────┘  └───────────────┘   │
-  │                                                          │
-  │  ┌─────────────────┐  ┌──────────────────────────────┐  │
-  │  │   ResNet-50     │  │          VGG16               │  │
-  │  │   (baseline)    │  │         (baseline)           │  │
-  │  └─────────────────┘  └──────────────────────────────┘  │
-  │                                                          │
-  │  Optimizer  : AdamW (weight decay = 1e-4)               │
-  │  Scheduler  : ReduceLROnPlateau (patience = 3)          │
-  │  Precision  : Mixed precision — AMP GradScaler          │
-  │  Loss       : CrossEntropyLoss                          │
-  └──────────────────────────────────────────────────────────┘
+Benchmark Models (PyTorch)
+────────────────────────────────────────────────────────────────
+  CNN Baselines
+  +---------------+  +---------------+  +---------------+
+  |    VGG16      |  | Inception_v3  |  |  ResNet200d   |
+  +---------------+  +---------------+  +---------------+
+
+  Vision Transformers
+  +--------------------+  +--------------------+
+  | ViT-B/16           |  | ViT-B/16           |
+  | google/vit-base    |  | nateraw/vit-base   |
+  | patch16-224        |  | patch16-224-cifar10|
+  +--------------------+  +--------------------+
+
+  +--------------------+  +--------------------+
+  | Swin-B             |  | BEiT               |
+  | swin_base_patch4   |  | microsoft/beit-    |
+  | _window7_224       |  | base-pt22k-ft22k   |
+  +--------------------+  +--------------------+
+
+  State Space Model
+  +--------------------+
+  | MambaVision-L      |
+  | nvidia/MambaVision |
+  | -L-21K             |
+  +--------------------+
+
+  Training Config (all models)
+  Optimizer : AdamW
+  Scheduler : ReduceLROnPlateau
+  Precision : Mixed precision — AMP GradScaler
+  Loss      : CrossEntropyLoss
 
 Evaluation
-──────────────────────────────────────────────────────────────
-  F1-Score (macro + per-class)
-  Confusion matrix (normalized)
-  Loss and accuracy curves (train vs. validation)
+────────────────────────────────────────────────────────────────
+  Accuracy · F1-Score (macro + per-class) · Confusion matrix · Loss curves
 ```
 
 ---
@@ -106,6 +115,7 @@ plant-disease-vision-transformers/
 ├── notebooks/
 │   └── vision_transformers_finetuning.ipynb
 ├── results/
+│   ├── confusion_matrix_vgg16.png
 │   ├── confusion_matrix_vit.png
 │   ├── confusion_matrix_beit.png
 │   └── learning_curves.png
@@ -123,9 +133,9 @@ plant-disease-vision-transformers/
 | Category | Details |
 |:---|:---|
 | Deep Learning | PyTorch 2.1+, Hugging Face Transformers, `timm` |
-| Vision Models | ViT-B/16, BEiT (`microsoft/beit-base-patch16-224`) |
-| State Space Models | Mamba-SSM |
-| CNN Baselines | ResNet-50, VGG16 (via `timm`) |
+| CNN Baselines | VGG16, Inception_v3, ResNet200d |
+| Vision Transformers | ViT-B/16 (`google`, `nateraw`), Swin-B, BEiT (`microsoft`) |
+| State Space Models | MambaVision-L (`nvidia/MambaVision-L-21K`) |
 | Preprocessing | OpenCV, scikit-image (`threshold_otsu`, `regionprops`) |
 | Optimization | AdamW, ReduceLROnPlateau, AMP GradScaler |
 | Evaluation | scikit-learn (F1-Score, confusion matrix) |

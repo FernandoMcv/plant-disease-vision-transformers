@@ -1,35 +1,35 @@
 # Changelog — plant-disease-vision-transformers
 
-Todos los cambios notables en este proyecto están documentados en este archivo.  
-Formato basado en [Keep a Changelog](https://keepachangelog.com/es/1.0.0/).  
-Versionado según [SemVer](https://semver.org/lang/es/).
+All notable changes to this project are documented in this file.
+Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+Versioning follows [SemVer](https://semver.org/).
 
 ---
 
 ## [Unreleased]
 
-### Planeado
-- Integración con Weights & Biases (W&B) para tracking de experimentos
-- Soporte para dataset personalizado vía configuración YAML
-- API REST con FastAPI para inferencia remota
-- GitHub Pages con resultados interactivos (Plotly)
+### Planned
+- Weights & Biases (W&B) integration for experiment tracking
+- Custom dataset support via YAML config
+- FastAPI REST endpoint for remote inference
+- GitHub Pages with interactive results (Plotly)
 
 ---
 
-## [1.0.0] — 2026-08-12
+## [1.0.0] — 2026-08-13
 
 ### Added
-- Fine-tuning de **ViT-B/16** (`google/vit-base-patch16-224`) con descongelamiento progresivo del 30% de capas profundas
-- Fine-tuning de **BEiT** (`microsoft/beit-base-patch16-224`) sobre DatasetCOLEAF (9 clases)
-- Fine-tuning de arquitecturas CNN baseline: **ResNet-50** y **VGG16** para comparación SOTA
-- Experimentos con **Mamba-SSM** como arquitectura alternativa basada en State Space Models
-- Pipeline de preprocesamiento no supervisado con **segmentación Otsu** y extracción de regiones (`regionprops`)
-- Optimización con `AdamW`, scheduler `ReduceLROnPlateau` y Mixed Precision Training (`AMP GradScaler`)
-- Evaluación multiclase: F1-Score por clase, Confusion Matrix normalizada, Curvas de Loss/Accuracy
-- Exportación de resultados a `.csv` y visualizaciones a `.png`
+- Benchmark of 8 architectures on DatasetCOLEAF (9-class coffee leaf disease dataset)
+- **CNN baselines:** VGG16, Inception_v3, ResNet200d
+- **Vision Transformers:** ViT-B/16 (`google/vit-base-patch16-224`), ViT-B/16 (`nateraw/vit-base-patch16-224-cifar10`), Swin-B (`swin_base_patch4_window7_224`), BEiT (`microsoft/beit-base-patch16-224-pt22k-ft22k`)
+- **State Space Model:** MambaVision-L (`nvidia/MambaVision-L-21K`)
+- Preprocessing pipeline: Otsu thresholding + regionprops feature extraction
+- Training config: AdamW, ReduceLROnPlateau, AMP GradScaler, CrossEntropyLoss
+- Evaluation: per-class F1-Score, normalized confusion matrix, loss/accuracy curves
+- GitHub Actions CI: flake8 lint + black format check
 
 ### Technical Details
 - **Framework:** PyTorch 2.x + Hugging Face Transformers + `timm`
-- **Dataset:** DatasetCOLEAF — 9 clases de enfermedades en hojas de café
-- **Hardware:** GPU NVIDIA (entrenamiento con AMP para optimización de memoria)
-- **Métricas:** Validation F1-Score (macro), Validation Loss, per-class precision/recall
+- **Dataset:** DatasetCOLEAF — 9 classes of coffee leaf diseases
+- **Hardware:** NVIDIA GPU with AMP mixed precision
+- **Metrics:** Validation Accuracy, F1-Score (macro), per-class precision/recall
