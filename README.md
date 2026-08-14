@@ -165,4 +165,4 @@ MIT — see [LICENSE](LICENSE).
 
 ## Author
 
-Fernando Castro · [LinkedIn](https://linkedin.com/in/FernandoMcv) · [GitHub](https://github.com/FernandoMcv)
+Fernando Castro · [LinkedIn](https://www.linkedin.com/in/fernandocastrov/) · [GitHub](https://github.com/FernandoMcv)
