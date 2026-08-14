@@ -10,23 +10,6 @@ Comparative benchmark of 8 deep learning architectures — CNN baselines, Vision
 
 ---
 
-## Results
-
-| Architecture | Model | Val. Accuracy | Val. F1-Score (macro) | Parameters |
-|:---|:---|:---:|:---:|:---:|
-| CNN | VGG16 | — | — | 138M |
-| CNN | Inception_v3 | — | — | 27M |
-| CNN | ResNet200d | — | — | 65M |
-| Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | — | — | 86M |
-| Vision Transformer | ViT-B/16 `nateraw/vit-base-patch16-224-cifar10` | — | — | 86M |
-| Vision Transformer | Swin-B `swin_base_patch4_window7_224` | — | — | 88M |
-| Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | — | — | 86M |
-| State Space Model | MambaVision-L `nvidia/MambaVision-L-21K` | — | — | — |
-
-> Results pending. Will be updated after final training runs. Confusion matrices and learning curves in `/results/`.
-
----
-
 ## Architecture
 
 ```
@@ -141,6 +124,31 @@ plant-disease-vision-transformers/
 | Evaluation | scikit-learn (F1-Score, confusion matrix) |
 | Visualization | Matplotlib, Seaborn |
 | CI | GitHub Actions (flake8, black) |
+
+---
+
+## Results
+
+| Architecture | Model | Val. Accuracy | Val. F1-Score (macro) | Parameters |
+|:---|:---|:---:|:---:|:---:|
+| CNN | VGG16 | — | — | 138M |
+| CNN | Inception_v3 | — | — | 27M |
+| CNN | ResNet200d | — | — | 65M |
+| Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | — | — | 86M |
+| Vision Transformer | ViT-B/16 `nateraw/vit-base-patch16-224-cifar10` | — | — | 86M |
+| Vision Transformer | Swin-B `swin_base_patch4_window7_224` | — | — | 88M |
+| Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | — | — | 86M |
+| State Space Model | MambaVision-L `nvidia/MambaVision-L-21K` | — | — | — |
+
+> Results pending. Will be updated after final training runs. Confusion matrices and learning curves in `/results/`.
+
+---
+
+## 📱 Mobile Deployment
+
+The best performing models from this benchmark were quantized using **PyTorch Mobile Lite** (`.ptl`) and deployed to an Edge AI Android application for real-time inference without cloud dependency.
+
+> **View the companion repository:** [cafe-diagnostic-tool-android](https://github.com/FernandoMcv/cafe-diagnostic-tool-android)
 
 ---
 
