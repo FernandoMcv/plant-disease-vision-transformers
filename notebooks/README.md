@@ -1,7 +1,14 @@
-# notebooks/
+# Notebooks
 
-Esta carpeta contiene los Jupyter Notebooks del proyecto.
+## `vision_transformers_finetuning.ipynb`
 
-## Contenido
+Notebook principal del benchmark. Ejecutar en **Google Colab** con GPU T4 o A100.
 
-- `vision_transformers_finetuning.ipynb` — Notebook principal con el benchmark completo de Vision Transformers (ViT, BEiT, Mamba-SSM) para clasificación de enfermedades en hojas de café.
+### Cómo correr y pushear resultados a GitHub desde Colab
+
+1. Abre el notebook en Colab
+2. Ejecuta la **Sección 0 — Setup Git** (primera vez solamente)
+3. Corre el entrenamiento normalmente
+4. Al final, ejecuta la **Sección Final — Push a GitHub**
+
+Las gráficas se guardan automáticamente en `/results/` y se pushean con el notebook.
