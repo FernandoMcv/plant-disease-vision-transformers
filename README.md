@@ -132,7 +132,7 @@ plant-disease-vision-transformers/
 | Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | — | — | 86M |
 | Vision Transformer | ViT-B/16 `nateraw/vit-base-patch16-224-cifar10` | — | — | 86M |
 | Vision Transformer | Swin-B `swin_base_patch4_window7_224` | — | — | 88M |
-| Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | — | — | 86M |
+| Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | **76.96%** | **73.87%** | 86M |
 | State Space Model | MambaVision-L `nvidia/MambaVision-L-21K` | — | — | — |
 
 > Training in progress on GCP (Google Colab + GPU). Results and plots will be updated after each run.
@@ -150,7 +150,7 @@ The best performing models from this benchmark were quantized using **PyTorch Mo
 
 ## Dataset
 
-**DatasetCOLEAF** — 9-class coffee leaf disease dataset.
+**DatasetCOLEAF** — 9-class subset of the 10-class coffee leaf disease dataset (class selection per advisor criteria).
 Not included in this repository. See the notebook for data loading and preparation steps.
 
 ---
