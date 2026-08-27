@@ -97,11 +97,6 @@ plant-disease-vision-transformers/
 │       └── ci.yml              GitHub Actions — lint and format check
 ├── notebooks/
 │   └── vision_transformers_finetuning.ipynb
-├── results/
-│   ├── confusion_matrix_vgg16.png
-│   ├── confusion_matrix_vit.png
-│   ├── confusion_matrix_beit.png
-│   └── learning_curves.png
 ├── .gitignore
 ├── CHANGELOG.md
 ├── LICENSE
@@ -140,17 +135,8 @@ plant-disease-vision-transformers/
 | Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | — | — | 86M |
 | State Space Model | MambaVision-L `nvidia/MambaVision-L-21K` | — | — | — |
 
-> Training in progress on GCP (Google Colab + GPU). Results and plots will be updated automatically after each run.
-
-### Learning Curves
-
-![Learning Curves](results/learning_curves.png)
-
-### Confusion Matrices
-
-| VGG16 | ViT-B/16 | BEiT |
-|:---:|:---:|:---:|
-| ![VGG16](results/confusion_matrix_vgg16.png) | ![ViT](results/confusion_matrix_vit.png) | ![BEiT](results/confusion_matrix_beit.png) |
+> Training in progress on GCP (Google Colab + GPU). Results and plots will be updated after each run.
+> Full outputs — confusion matrices, learning curves, and per-class metrics — are visible directly in the [notebook on GitHub](notebooks/vision_transformers_finetuning.ipynb).
 
 ---
 
