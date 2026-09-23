@@ -129,14 +129,13 @@ plant-disease-vision-transformers/
 | CNN | VGG16 | — | — | 138M |
 | CNN | Inception_v3 | — | — | 27M |
 | CNN | ResNet200d | — | — | 65M |
-| Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | — | — | 86M |
-| Vision Transformer | ViT-B/16 `nateraw/vit-base-patch16-224-cifar10` | — | — | 86M |
-| Vision Transformer | Swin-B `swin_base_patch4_window7_224` | — | — | 88M |
+| Vision Transformer | ViT-B/16 `google/vit-base-patch16-224` | 69.12% | 65.42% | 86M |
+| Vision Transformer | ViT-B/16 `nateraw/vit-base-patch16-224-cifar10` | 67.16% | 65.27% | 86M |
+| Vision Transformer | Swin-B `swin_base_patch4_window7_224` | 73.53% | 69.40% | 88M |
 | Vision Transformer | BEiT `microsoft/beit-base-patch16-224-pt22k-ft22k` | **76.96%** | **73.87%** | 86M |
 | State Space Model | MambaVision-L `nvidia/MambaVision-L-21K` | — | — | — |
 
-> Training in progress on GCP (Google Colab + GPU). Results and plots will be updated after each run.
-> Full outputs — confusion matrices, learning curves, and per-class metrics — are visible directly in the [notebook on GitHub](notebooks/vision_transformers_finetuning.ipynb).
+> **Nota:** Los resultados mostrados son preliminares. Las métricas finales, matrices de confusión y pesos de los modelos se mantienen privados temporalmente debido a que este proyecto forma parte de una tesis de grado en curso. Se publicarán en su totalidad tras la sustentación oficial.
 
 ---
 
